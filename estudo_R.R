@@ -193,3 +193,72 @@ ggplot(data = dados, aes(x = Idade)) +
     color = 'lightblue',
     linewidth = 1
   )
+
+
+# Boxplot
+sexo <- c('masculino', 'feminino')
+
+cor <- c('indigena', 'branca', 'preta', 'amarela', 'parda')
+
+anos_de_estudo <- c('sem instrução/menos de 1 anos',
+                    '1 ano',
+                    '2 anos',
+                    '3 anos',
+                    '4 anos',
+                    '5 anos',
+                    '6 anos',
+                    '7 anos',
+                    '8 anos',
+                    '9 anos',
+                    '10 anos',
+                    '11 anos',
+                    '12 anos',
+                    '13 anos',
+                    '14 anos',
+                    '15 anos ou mais',
+                    'não determinado')
+
+ggplot(dados, aes(x = '', y = Altura)) +
+  stat_boxplot(geom = 'errorbar', width = 0.4) +
+  geom_boxplot(fill = 'lightblue') +
+  coord_flip() +
+  ylab('Metros') +
+  xlab('') +
+  ggtitle('Boxplot alturas')
+
+
+dados$Cat.Sexo <- factor(dados$Sexo) # Cria variável categórica
+levels(dados$Cat.Sexo) <- sexo # Níveis (labels) das variáveis categóricas
+
+head(dados)
+
+ggplot(data = dados, aes(x = Cat.Sexo,
+                         y = Altura,
+                         group = Sexo)) +
+  stat_boxplot(geom = 'errorbar', width = 0.4) +
+  geom_boxplot(fill = c('lightblue', 'orange')) +
+  coord_flip() +
+  ylab('Metros') +
+  xlab('Sexo') +
+  ggtitle('Boxplot alturas x sexo')
+
+
+dados$Cat.UF <- factor(dados$UF) 
+
+ggplot( 
+  data = dados[(dados$UF == 29 | dados$UF == 35) & dados$Renda < 10000, ],  
+  aes(y = Renda, x = Cat.UF) 
+) +  
+  stat_boxplot(geom ='errorbar', width = 0.4) +  
+  geom_boxplot(fill = c('#3274A1', "orange")) +  
+  coord_flip() + 
+  ylab("R$") +  
+  xlab("UF") +  
+  ggtitle('Renda (R$) - Bahia X São Paulo') + 
+  theme( 
+    plot.title = element_text(size = 14, hjust = 0.5), 
+    axis.title.y = element_text(size = 12, vjust = +0.2), 
+    axis.title.x = element_text(size = 12, vjust = -0.2), 
+    axis.text.y = element_text(size = 10), 
+    axis.text.x = element_text(size = 10) 
+  )
