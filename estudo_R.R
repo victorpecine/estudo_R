@@ -32,3 +32,29 @@ rownames(renda_media) <- c('masculino', 'feminino')
 colnames(renda_media) <- c('indigena', 'branca', 'preta', 'amarela', 'parda')
 
 renda_media
+
+max(dados$Renda)
+
+classes <- c(0, 2900, 7100, 22000, 200000)
+labels <- c('D', 'C', 'B', 'A')
+
+
+frequencia <- table(
+                    cut(
+                    x = dados$Renda,
+                    breaks = classes,
+                    labels = labels,
+                    include.lowest = TRUE
+                    )
+)
+
+frequencia
+
+porcent_classe <- prop.table(frequencia) * 100
+porcent_classe
+
+dist_freq_quanti <- cbind('frequencia' = frequencia, 'porcentagem' = porcent_classe)
+
+dist_freq_quanti <- dist_freq_quanti[order(row.names(dist_freq_quanti)),]
+
+dist_freq_quanti
