@@ -26,14 +26,9 @@ dist_freq_quali_percent <- round(dist_freq_quali_percent, digits=2)
 
 dist_freq_quali_percent
 
-
-<<<<<<< HEAD
 renda_media <- tapply(dados$Renda, list(dados$Sexo, dados$Cor), mean)
 
 rownames(renda_media) <- c('masculino', 'feminino')
 colnames(renda_media) <- c('indigena', 'branca', 'preta', 'amarela', 'parda')
 
 renda_media
-=======
-renda_media <- tapply((vector), index, function)
->>>>>>> b85e0c45ecc53c8bf56c9ab00361f65413521cd3
