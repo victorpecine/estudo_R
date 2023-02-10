@@ -58,3 +58,56 @@ dist_freq_quanti <- cbind('frequencia' = frequencia, 'porcentagem' = porcent_cla
 dist_freq_quanti <- dist_freq_quanti[order(row.names(dist_freq_quanti)),]
 
 dist_freq_quanti
+
+
+classes_altura <- c(min(dados$Altura), 1.65, 1.75, max(dados$Altura))
+
+labels_altura <- c('1 - Baixa', '2 - Média', '3 - Alta')
+
+frequencia <- table(
+                    cut(
+                      x = dados$Altura,
+                      breaks = classes_altura,
+                      labels = labels_altura,
+                      include.lowest = TRUE
+                    )
+)
+
+percentual <- prop.table(frequencia) * 100
+
+dist_freq_altura <- cbind('frequencia' = frequencia, 'porcentagem' = percentual)
+
+dist_freq_altura[
+                 order(row.names(dist_freq_altura)),
+]
+
+
+# Definição do número de classes
+# Regra de Sturges
+
+n <- nrow(dados)
+
+k <- 1 + (10 / 3) * log10(n)
+
+k <- floor(k)
+k
+
+frequencia <- table(
+                    cut(
+                      x = dados$Renda,
+                      breaks = k,
+                      include.lowest = TRUE
+                    )
+)
+
+frequencia <- cbind(frequencia)
+frequencia
+
+percentual <- prop.table(frequencia) * 100
+percentual
+
+dist_freq_amplitude_fixa <- cbind('frequencia' = frequencia, 'porcentagem' = porcent_classe)
+
+dist_freq_amplitude_fixa <- dist_freq_amplitude_fixa[order(row.names(dist_freq_amplitude_fixa)),]
+
+dist_freq_amplitude_fixa
