@@ -111,3 +111,17 @@ dist_freq_amplitude_fixa <- cbind('frequencia' = frequencia, 'porcentagem' = por
 dist_freq_amplitude_fixa <- dist_freq_amplitude_fixa[order(row.names(dist_freq_amplitude_fixa)),]
 
 dist_freq_amplitude_fixa
+
+options(repr.plot.width=18, repr.plot.height=8)
+
+hist(dados$Altura)
+
+hist(x=dados$Altura,
+     breaks='sturges',
+     col='lightgreen',
+     main='Histograma das alturas',
+     xlab='Altura',
+     ylab='Frequência',
+     ylim=c(0, 20000)
+)
+
