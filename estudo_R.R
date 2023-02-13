@@ -459,3 +459,8 @@ dataset
 
 pred = predict(regressao, data.frame(X = c(7510, 7550)))
 pred
+
+
+# Resíduos
+dataset['residuos'] <- regressao$residuals
+head(dataset)
