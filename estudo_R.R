@@ -368,3 +368,71 @@ if (p_valor <= significancia){
 } else{
   cat('Hipótese nula aceita\nA amostra é proveniente de uma distribuição normal')
 }
+
+
+
+# Correlação
+
+# Y = Gasto da família
+# X = Renda da família
+dataset <- data.frame(
+  Y = c(3011, 1305, 1879, 2654, 2849, 1068, 2892, 2543, 3074, 849, 2184, 2943, 1357, 2755, 2163, 3099, 1600, 353, 1778, 740, 2129, 3302, 2412, 2683, 2515, 2395, 2292, 1000, 600, 1864, 3027, 1978, 2791, 1982, 900, 1964, 1247, 3067, 700, 1500, 3110, 2644, 1378, 2601, 501, 1292, 2125, 1431, 2260, 1770),
+  X = c(9714, 3728, 6062, 8845, 8378, 3338, 8507, 7947, 9915, 1632, 6825, 8918, 4100, 9184, 6180, 9997, 4500, 1069, 5925, 2466, 6083, 9712, 7780, 8383, 7185, 7483, 7640, 2100, 2000, 6012, 8902, 5345, 8210, 5662, 2700, 6546, 2900, 9894, 1500, 5000, 8885, 8813, 3446, 7881, 1164, 3401, 6641, 3329, 6648, 4800)
+)
+
+head(dataset)
+
+summary(dataset)
+
+apply(dataset, 2, sd)
+
+install.packages('ggplot2')
+library(ggplot2)
+
+stack(dataset) # Empilhamento das infos do dataset
+
+# Boxplot
+ggplot(stack(dataset), aes(x = ind, y = values)) + 
+  stat_boxplot(geom ='errorbar', width = 0.4) + 
+  geom_boxplot(fill = c('#3274A1', "orange")) + 
+  coord_flip() +
+  xlab("Variáveis") + 
+  ylab("Reais (R$)") + 
+  ggtitle('Box-plot') +
+  theme(
+    plot.title=element_text(size = 14, hjust = 0.5),
+    axis.title.y=element_text(size = 12, vjust = +0.2),
+    axis.title.x=element_text(size = 12, vjust = -0.2),
+    axis.text.y=element_text(size = 10),
+    axis.text.x=element_text(size = 10),
+  )
+
+# Dispersão
+ggplot(data = dataset, aes(x = X, y = Y)) + 
+  geom_point(size = 1.5, stroke = 0) + 
+  geom_smooth(method = lm) +
+  xlab("Renda das Famílias") + 
+  ylab("Gasto das Famílias") + 
+  ggtitle('Reta de Regressão - Gasto X Renda') +
+  theme(
+    plot.title=element_text(size = 12, hjust = 0.5),
+    axis.title.y=element_text(size = 10, vjust = +0.2),
+    axis.title.x=element_text(size = 10, vjust = -0.2),
+    axis.text.y=element_text(size = 10),
+    axis.text.x=element_text(size = 10),
+  )
+
+cor(dataset) # Correlação
+
+# Covariância
+amostra <- data.frame(
+  Idade = c(39, 29, 21, 49, 29, 34, 32, 32, 24, 53, 28, 28, 46, 58, 41, 43, 31, 55, 52, 54),
+  Renda = c(1500, 1000, 3500, 1570, 600, 1200, 2000, 500, 1300, 600, 1500, 3000, 0, 550, 1500, 1600, 746, 1000, 0, 1400),
+  Anos.de.Estudo = c(6, 7, 12, 13, 9, 12, 12, 6, 7, 5, 7, 16, 12, 3, 12, 9, 1, 6, 1, 6),
+  Altura = c(1.6162, 1.7525, 1.6940, 1.8041, 1.7854, 1.7468, 1.6633, 1.6937, 1.6569, 1.6671, 1.6786, 1.6730, 1.7853, 1.6090, 1.7833, 1.6709, 1.6392, 1.6861, 1.7107, 1.7288)
+)
+
+head(amostra)
+
+matrix_cov <- cov(amostra)
+matrix_cov
