@@ -262,3 +262,93 @@ ggplot(
     axis.text.y = element_text(size = 10), 
     axis.text.x = element_text(size = 10) 
   )
+
+
+# Tabela normal padronizada
+Z <- seq(0, 3.99, by = 0.01)
+
+probabilidade <- pnorm(Z)
+
+tabela_norm_padron <- matrix(probabilidade, ncol = 10, byrow = TRUE)
+
+colnames(tabela_norm_padron) <- format(seq(0.00, 0.09, by = 0.01))
+rownames(tabela_norm_padron) <- format(seq(0.00, 3.9, by = 0.1), digits = 2, nsmall = 2)
+
+tabela_norm_padron
+
+
+# O faturamento diário de um motorista de aplicativo segue uma distribuição
+# aproximadamente normal, com média R$ 300,00 e desvio padrão igual a R$ 50,00.
+# Obtenha as probabilidades de que, em um dia aleatório, o motorista ganhe:
+# Entre R$ 250,00 e R$ 350,00
+# Entre R$ 400,00 e R$ 500,00
+
+# 1. entre R$ 250,00 e R$ 350,00
+media <- 300
+desvio_padrao <- 50
+Z_inferior = (250 - media) / desvio_padrao
+Z_superior = (350 - media) / desvio_padrao
+
+probabilidade <- pnorm(Z_superior) - pnorm(Z_inferior)
+round(probabilidade, 4)
+
+# 2. entre R$ 400,00 e R$ 500,00
+media <- 300
+desvio_padrao <- 50
+Z_inferior = (400 - media) / desvio_padrao
+Z_superior = (500 - media) / desvio_padrao
+
+probabilidade <- pnorm(Z_superior) - pnorm(Z_inferior)
+round(probabilidade, 4)
+
+
+
+# Os pesos dos lutadores de uma academia de MMA, com 500 atletas, são normalmente
+# distribuídos, com média igual a 80,5 kg e desvio padrão igual a 12,2 kg.
+# Encontre o número de atletas dessa academia que se enquadram na categoria peso leve,
+# que vai de 65,7 kg até 70,3 kg.
+
+n <- 500
+media <- 80.5
+desvio_padrao <- 12.2
+Z_inferior <- (65.7 - media) / desvio_padrao
+Z_superior <- (70.3 - media) / desvio_padrao
+
+probabilidade <- pnorm(Z_superior) - pnorm(Z_inferior)
+
+n_atletas <- probabilidade * n
+ceiling(n_atletas)
+
+
+
+# O Inmetro verificou que as lâmpadas incandescentes da fabricante XPTO apresentam uma
+# vida útil normalmente distribuída, com média igual a 720 dias e desvio padrão igual a
+# 30 dias. Calcule a probabilidade de uma lâmpada escolhida ao acaso durar:
+# Entre 650 e 750 dias
+# Mais que 800 dias
+# Menos que 700 dias
+
+# 1.
+media <- 720
+desvio_padrao <- 30
+Z_inferior <- (650 - media) / desvio_padrao
+Z_superior <- (750- media) / desvio_padrao
+
+probabilidade <- pnorm(Z_superior) - pnorm(Z_inferior)
+round(probabilidade, 4)
+
+# 2.
+media <- 720
+desvio_padrao <- 30
+Z_superior <- (800- media) / desvio_padrao
+
+probabilidade <- pnorm(Z_superior)
+round(probabilidade, 4)
+
+# 3.
+media <- 720
+desvio_padrao <- 30
+Z_inferior <- (700 - media) / desvio_padrao
+
+probabilidade <- pnorm(Z_inferior)
+round(probabilidade, 4)
