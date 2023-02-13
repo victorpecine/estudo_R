@@ -352,3 +352,19 @@ Z_inferior <- (700 - media) / desvio_padrao
 
 probabilidade <- pnorm(Z_inferior)
 round(probabilidade, 4)
+
+
+
+# Teste de normalidade
+significancia <- 0.05
+
+set.seed(2811)
+amostra <- sample_n(dados, 5000)
+resultado <- shapiro.test(amostra$Renda)
+p_valor <- resultado$p.value
+
+if (p_valor <= significancia){
+  cat('Hipótese nula rejeitada\nA amostra não é proveniente de uma distribuição normal')
+} else{
+  cat('Hipótese nula aceita\nA amostra é proveniente de uma distribuição normal')
+}
