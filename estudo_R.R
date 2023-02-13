@@ -436,3 +436,18 @@ head(amostra)
 
 matrix_cov <- cov(amostra)
 matrix_cov
+
+
+# Regressão linear
+regressao <- lm(formula = Y ~ X,
+                data = dataset)
+regressao
+
+beta_1 <- regressao$coefficients[1]
+beta_1
+
+beta_2 <- regressao$coefficients[2]
+beta_2
+
+resumo <- summary(regressao)
+resumo
