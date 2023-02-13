@@ -451,3 +451,11 @@ beta_2
 
 resumo <- summary(regressao)
 resumo
+
+# Previsões dentro da amosta
+dataset['Y_pred'] <- regressao$fitted.values
+dataset
+
+
+pred = predict(regressao, data.frame(X = c(7510, 7550)))
+pred
