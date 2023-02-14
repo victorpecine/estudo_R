@@ -86,3 +86,22 @@ if (p_valor_medi <= significancia) {
 } else {
   cat('A variável MEDI não é significativa')
 }
+
+
+# Regressão linear múltipla
+# Contraste de modelos
+# Comparação entre modelo completo e outro sem a variável em questão
+
+modelo_completo <- lm(data = Airq, airq ~ vala + coas + dens)
+summary(modelo_completo)
+
+modelo_incompleto <- lm(data = Airq, airq ~ vala + coas)
+summary(modelo_incompleto)
+
+# Análise de variância
+anova(modelo_completo, modelo_incompleto)
+
+# p_valor > 0.05
+# Não há diferença significativa entre o modelo completo (com DENS) e incompleto (sem DENS)
+# A variável DENS pode ser removida
+# Optar por utilizar o modelo mais simples (menos variáveis)
